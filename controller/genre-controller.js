@@ -1,21 +1,27 @@
-const mdb_api = require('../services/mdb-services');
+const mdb_api = require('../services/mdb-service');
 
-async function getGenres(req, res) {
-    // return mdb_api.getGenre();
+
+async function getGenres(req,res) {
     const allowId = [28,12,16];
-    const listGenre = await mdb_api.getGenre();
+    const listGenre =  await mdb_api.getGenre();
+    // const listAllow = listGenre.genres.map((item,idx) => {
+    //     if(allowId.includes(item.id)){
+    //         return item;
+    //     } else{
+    //         delete listGenre.genres[idx];
+    //     }
+    // })
 
     const listAllow = listGenre.genres.filter(item => {
-        if (allowId.includes(item.id)) {
+        if(allowId.includes(item.id)) {
             console.log(item.id);
-            return item;
+            return item
         };
     });
-
     const findById = listGenre.genres.find(item => {
-        if (item.id === 28) {
+        if(item.id===28) {
             console.log(item.id);
-            return item;
+            return item
         };
     });
     console.log(listAllow);
@@ -23,4 +29,4 @@ async function getGenres(req, res) {
 }
 
 
-module.exports = { getGenres };
+module.exports = {getGenres};
